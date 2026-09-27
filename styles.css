@@ -25,9 +25,7 @@ body {
   min-height: 100vh;
 }
 
-body.cargando-auth {
-  visibility: hidden;
-}
+
 
 header.main-header {
   background-color: white;
@@ -545,4 +543,146 @@ header.main-header {
   height: auto;
   display: block;
   margin: 0 auto;
+}
+/* ============================================================
+   RESPONSIVE
+============================================================= */
+
+/* Botón hamburguesa: oculto en escritorio, visible en móvil */
+.btn-menu-movil {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--primary-dark);
+  padding: 4px 8px;
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+}
+
+.sidebar-overlay.visible {
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-split {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+  .window-container {
+    padding: 10px;
+  }
+
+  .btn-menu-movil {
+    display: inline-block;
+  }
+
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+
+  .sidebar.abierto {
+    transform: translateX(0);
+  }
+
+  .content-area {
+    padding: 15px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    grid-column: span 1;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .modal-overlay {
+    padding: 15px;
+  }
+
+  .modal-card {
+    padding: 18px;
+  }
+
+  .login-card {
+    padding: 24px;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablas: scroll horizontal en vez de romperse */
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabla-scroll .custom-table {
+  min-width: 600px;
+}
+body.pagina-login {
+  background: var(--primary);
+}
+
+body.pagina-login header.main-header {
+  background: transparent;
+  box-shadow: none;
+}
+
+body.pagina-login .window-container {
+  padding: 0;
+}
+
+body.pagina-login .login-window {
+  min-height: 100vh;
+  border-radius: 0;
 }

@@ -643,6 +643,7 @@ function exportarClientePDF() {
 
 // 10) ARRANQUE DE CADA PÁGINA -----------------------------------------
 function inicializarPagina() {
+    inicializarResponsive();
     inicializarLogout();
     cargarMetricasDashboard();
     inicializarFormularioRegistro();
@@ -893,4 +894,49 @@ function inicializarComprobantePago() {
     }
 }
 
-/* ===== FIN BLOQUE NUEVO ===== */
+function inicializarResponsive() {
+    // 1) Botón hamburguesa + overlay para el sidebar (solo si la página tiene sidebar)
+    var sidebar = document.querySelector('.sidebar');
+    var header = document.querySelector('.main-header');
+
+    if (sidebar && header) {
+        var overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+
+        var btnMenu = document.createElement('button');
+        btnMenu.className = 'btn-menu-movil';
+        btnMenu.type = 'button';
+        btnMenu.innerHTML = '☰';
+        header.insertBefore(btnMenu, header.firstChild);
+
+        function abrirSidebar() {
+            sidebar.classList.add('abierto');
+            overlay.classList.add('visible');
+        }
+        function cerrarSidebar() {
+            sidebar.classList.remove('abierto');
+            overlay.classList.remove('visible');
+        }
+
+        btnMenu.addEventListener('click', function () {
+            if (sidebar.classList.contains('abierto')) cerrarSidebar();
+            else abrirSidebar();
+        });
+
+        overlay.addEventListener('click', cerrarSidebar);
+
+        sidebar.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', cerrarSidebar);
+        });
+    }
+
+    // 2) Envolver todas las tablas para que hagan scroll horizontal en móvil
+    document.querySelectorAll('.custom-table').forEach(function (tabla) {
+        if (tabla.parentElement.classList.contains('tabla-scroll')) return;
+        var envoltura = document.createElement('div');
+        envoltura.className = 'tabla-scroll';
+        tabla.parentNode.insertBefore(envoltura, tabla);
+        envoltura.appendChild(tabla);
+    });
+}
