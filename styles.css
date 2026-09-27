@@ -588,6 +588,17 @@ header.main-header {
 
 /* Móvil */
 @media (max-width: 768px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 12px;
+    font-size: 16px; /* evita que iOS haga zoom automático al enfocar el campo */
+  }
+  
   .window-container {
     padding: 10px;
   }
@@ -685,4 +696,38 @@ body.pagina-login .window-container {
 body.pagina-login .login-window {
   min-height: 100vh;
   border-radius: 0;
+}
+body.pagina-login .login-window {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-split {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
