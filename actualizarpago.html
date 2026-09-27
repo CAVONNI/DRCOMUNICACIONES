@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Actualizar Pago</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="modal-overlay">
+            <div class="modal-card">
+                <div class="panel-title" style="font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+                    Actualizar Pago
+                </div>
+                <p style="font-size: 13px; color: gray; margin-bottom: 20px;">Registra el pago del mes correspondiente a <strong id="pagoClienteNombre">...</strong></p>
+                <form id="formPago">
+                    <div class="form-group">
+                        <label>Mes *</label>
+                        <input type="text" id="pagoMes" placeholder="Ej. Junio 2026" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de pago *</label>
+                        <input type="date" id="pagoFecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Valor pagado *</label>
+                        <input type="number" id="pagoValor" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Método de pago</label>
+                        <select id="pagoMetodo">
+                            <option>Efectivo</option>
+                            <option>Transferencia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo electrónico del cliente *</label>
+                        <input type="email" id="pagoCorreo" placeholder="cliente@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Observaciones (opcional)</label>
+                        <textarea id="pagoObservaciones" rows="2" placeholder="Pago en efectivo, referencia..."></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px;">
+                        <button class="btn-secondary" type="button" id="btnCancelarPago">Cancelar</button>
+                        <button class="btn-success" type="submit" style="background: var(--accent);">Guardar Pago</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="comprobanteOverlay" style="display:none;">
+        <div class="modal-card comprobante-card">
+            <div id="comprobanteContenido" class="comprobante-contenido">
+                <div class="comprobante-header">
+                    <h2>DMR Comunicaciones</h2>
+                    <p class="comprobante-subtitulo">Comprobante de Pago</p>
+                </div>
+                <div class="comprobante-datos">
+                    <div class="comprobante-fila"><span>N° Comprobante:</span> <strong id="cpNumero"></strong></div>
+                    <div class="comprobante-fila"><span>Cliente:</span> <strong id="cpCliente"></strong></div>
+                    <div class="comprobante-fila"><span>Correo:</span> <strong id="cpCorreo"></strong></div>
+                    <div class="comprobante-fila"><span>Mes correspondiente:</span> <strong id="cpMes"></strong></div>
+                    <div class="comprobante-fila"><span>Fecha de pago:</span> <strong id="cpFecha"></strong></div>
+                    <div class="comprobante-fila"><span>Método de pago:</span> <strong id="cpMetodo"></strong></div>
+                    <div class="comprobante-fila comprobante-valor"><span>Valor pagado:</span> <strong id="cpValor"></strong></div>
+                    <div class="comprobante-fila" id="cpObsWrap"><span>Observaciones:</span> <strong id="cpObs"></strong></div>
+                </div>
+                <p class="comprobante-footer">Gracias por su pago. Comprobante generado automáticamente.</p>
+            </div>
+            <div id="comprobanteEstado" class="comprobante-estado"></div>
+            <div class="comprobante-acciones">
+                <button class="btn-secondary" type="button" id="btnCerrarComprobante">Cerrar y continuar</button>
+                <button class="btn-secondary" type="button" id="btnImprimirComprobante">Imprimir</button>
+                <button class="btn-success" type="button" id="btnDescargarComprobante" style="background: var(--accent);">Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="funciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Pagos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="admin-layout">
+            <aside class="sidebar">
+                <div class="login-logo">
+                    <img src="LOGO/logo2.png" alt="DMR Comunicaciones" class="logo-empresa">
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="incio.html">Inicio</a></li>
+                    <li><a href="listacliente.html">Clientes</a></li>
+                    <li><a href="registrocliente.html">+ Nuevo Cliente</a></li>
+                    <li class="active"><a href="pagos.html">Pagos</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
+                
+                </ul>
+                <div class="sidebar-footer">Cerrar sesión</div>
+            </aside>
+            <main class="content-area">
+                <div class="content-header">
+                    <h1>Historial de Pagos</h1>
+                </div>
+                <div class="panel-card">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Mes</th>
+                                <th>Valor</th>
+                                <th>Fecha de pago</th>
+                                <th>Método</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaPagosGeneral">
+                            <tr><td colspan="6">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="funciones.js"></script>
+</body>
+</html>

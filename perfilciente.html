@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Detalle del Cliente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="admin-layout">
+            <aside class="sidebar">
+                <div class="login-logo">
+                    <img src="LOGO/logo2.png" alt="DMR Comunicaciones" class="logo-empresa">
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="incio.html">Inicio</a></li>
+                    <li class="active"><a href="listacliente.html">Clientes</a></li>
+                    <li><a href="registrocliente.html">+ Nuevo Cliente</a></li>
+                    <li><a href="pagocliente.html">Pagos</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
+    
+                </ul>
+                <div class="sidebar-footer">Cerrar sesión</div>
+            </aside>
+            <main class="content-area">
+                <div class="content-header">
+                    <h1>Detalle del Cliente</h1>
+                </div>
+                <div class="detail-grid">
+                    <div>
+                        <div class="panel-card" style="margin-bottom: 20px;">
+                            <div class="client-profile-header">
+                                <div class="avatar-mock">👤</div>
+                                <div>
+                                    <h2 id="detalleNombre">Cargando...</h2>
+                                    <span class="status-badge active" id="detalleEstado" style="margin-top:4px; display:inline-block;">-</span>
+                                    <p style="font-size:14px; color:gray; margin-top:6px;">Cédula: <span id="detalleDocumento">-</span> | Teléfono: <span id="detalleTelefono">-</span></p>
+                                    <p style="font-size:13px; color:gray;">Dirección: <span id="detalleDireccion">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-title">Historial de pagos</div>
+                            <table class="custom-table">
+                                <thead>
+                                    <tr><th>Mes</th><th>Valor</th><th>Fecha de pago</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody id="tablaPagosBody">
+                                    <tr><td colspan="4">Cargando...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="panel-card" style="margin-bottom: 20px;">
+                            <div class="panel-title">Servicio contratado</div>
+                            <div style="font-size:14px; margin-bottom: 10px;"><strong>Servicio:</strong> <span id="detalleServicio">-</span></div>
+                            <div style="font-size:14px; margin-bottom: 10px;"><strong>Valor mensual:</strong> <span id="detalleValorMensual">-</span></div>
+                            <button class="btn-primary" id="btnActualizarPago" style="margin-top: 15px;">$ Actualizar Pago</button>
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-title">Resumen de cuenta</div>
+                            <div class="summary-box">
+                                <div class="summary-row"><span>Total facturado:</span> <span id="resumenTotalFacturado">-</span></div>
+                                <div class="summary-row"><span>Pagado:</span> <span id="resumenTotalPagado">-</span></div>
+                                <div class="summary-row"><span>Saldo pendiente:</span> <span id="resumenSaldoPendiente">-</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="funciones.js"></script>
+</body>
+</html>

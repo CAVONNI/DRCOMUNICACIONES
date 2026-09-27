@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Nuevo Cliente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="admin-layout">
+            <aside class="sidebar">
+                <div class="login-logo">
+                    <img src="LOGO/logo2.png" alt="DMR Comunicaciones" class="logo-empresa">
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="incio.html">Inicio</a></li>
+                    <li><a href="listacliente.html">Clientes</a></li>
+                    <li class="active"><a href="registrocliente.html">+ Nuevo Cliente</a></li>
+                    <li><a href="pagocliente.html">Pagos</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
+                </ul>
+                <div class="sidebar-footer">Cerrar sesión</div>
+            </aside>
+            <main class="content-area">
+                <div class="content-header">
+                    <h1>Registrar nuevo cliente</h1>
+                </div>
+                <div class="panel-card">
+                    <form class="form-grid" id="formRegistro">
+                        <div class="form-group">
+                            <label>Nombre completo *</label>
+                            <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección / Sector *</label>
+                            <input type="text" id="direccion" placeholder="Ej. Calle 84 Cra 7c" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono *</label>
+                            <input type="text" id="telefono" placeholder="Ej. 300 123 4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de servicio *</label>
+                            <select id="tipoServicio" required>
+                                <option value="">Seleccionar</option>
+                                <option>Internet</option>
+                                <option>Televisión</option>
+                                <option>Internet + TV</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Plan / Paquete</label>
+                            <input type="text" id="plan" placeholder="Ej. Plan 70 Mbps">
+                        </div>
+                        <div class="form-group">
+                            <label>Valor mensual *</label>
+                            <input type="number" id="valorMensual" placeholder="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de inicio *</label>
+                            <input type="date" id="fechaInicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Duración contrato</label>
+                            <select id="duracionContrato">
+                                <option value="">Seleccionar</option>
+                                <option>6 meses</option>
+                                <option>12 meses</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Documento / Cédula</label>
+                            <input type="text" id="documento" placeholder="12345678">
+                        </div>
+                        <div class="form-group" style="grid-column: span 3;">
+                            <label>Observaciones</label>
+                            <textarea id="observaciones" rows="3" placeholder="Referencia, notas adicionales..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-secondary" type="button" id="btnLimpiar">Limpiar</button>
+                            <button class="btn-success" type="submit">Guardar Cliente</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="funciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Lista de Clientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="admin-layout">
+            <aside class="sidebar">
+                <div class="login-logo">
+                    <img src="LOGO/logo2.png" alt="DMR Comunicaciones" class="logo-empresa">
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="incio.html">Inicio</a></li>
+                    <li class="active"><a href="listacliente.html">Clientes</a></li>
+                    <li><a href="registrocliente.html">+ Nuevo Cliente</a></li>
+                    <li><a href="pagocliente.html">Pagos</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
+                </ul>
+                <div class="sidebar-footer">Cerrar sesión</div>
+            </aside>
+            <main class="content-area">
+                <div class="content-header">
+                    <h1>Lista de Clientes</h1>
+                    <button class="btn-success" style="background: var(--accent);" onclick="location.href='registrocliente.html'">+ Nuevo Cliente</button>
+                </div>
+                <div class="panel-card">
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="buscarCliente" class="search-box" placeholder="Buscar por nombre, cédula o teléfono...">
+                    </div>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dirección / Sector</th>
+                                <th>Teléfono</th>
+                                <th>Servicio</th>
+                                <th>Valor Mes</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaClientesBody">
+                            <tr><td colspan="7">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="funciones.js"></script>
+</body>
+</html>
