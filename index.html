@@ -4,40 +4,337 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMR Comunicaciones - Iniciar sesión</title>
-    <link rel="icon" type="image/png" href="LOGO/logo.png">
+    <link rel="icon" type="image/png" href="LOGO/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ============================================================
+           LOGIN - DMR Comunicaciones
+           Idea: las ondas de señal del logo se expanden en el panel
+           izquierdo (único movimiento de la página). El resto es
+           quieto y sobrio para que el formulario sea lo importante.
+        ============================================================ */
+        body.login-nuevo {
+            --noche: #03080f;
+            --profundo: #061a30;
+            --senal: #00a8ff;
+            --marino: #0a3d62;
+            --tinta: #0f2236;
+            --gris: #5d6d82;
+            --borde: #cfd9e6;
+            --campo: #f6f9fc;
+            display: block;
+            min-height: 100vh;
+            background: #fff;
+            color: var(--tinta);
+            font-family: 'Sora', 'Segoe UI', Tahoma, sans-serif;
+        }
+        .login-nuevo *, .login-nuevo *::before, .login-nuevo *::after { font-family: inherit; }
+
+        .login-shell {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            min-height: 100vh;
+        }
+
+        /* ---------- Panel de marca ---------- */
+        .marca {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            padding: 56px 64px;
+            color: #fff;
+            background:
+                radial-gradient(ellipse 70% 55% at 49% 32%, #0b3b69 0%, rgba(6, 26, 48, 0) 70%),
+                linear-gradient(170deg, var(--profundo), var(--noche) 70%);
+        }
+        .emblema {
+            position: relative;
+            align-self: center;
+            justify-self: center;
+            width: min(520px, 100%);
+        }
+        .emblema img {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            mix-blend-mode: screen; /* el fondo negro del logo desaparece */
+        }
+        .emblema .onda {
+            position: absolute;
+            left: 49%;
+            top: 29%;
+            width: 190%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 168, 255, 0.7);
+            box-shadow: 0 0 24px rgba(0, 168, 255, 0.25), inset 0 0 24px rgba(0, 168, 255, 0.12);
+            transform: translate(-50%, -50%) scale(0.12);
+            opacity: 0;
+            animation: expandir 8s cubic-bezier(0.2, 0.55, 0.3, 1) infinite;
+        }
+        .emblema .onda:nth-child(1) { animation-delay: 0s; }
+        .emblema .onda:nth-child(2) { animation-delay: 2s; }
+        .emblema .onda:nth-child(3) { animation-delay: 4s; }
+        .emblema .onda:nth-child(4) { animation-delay: 6s; }
+        @keyframes expandir {
+            0%   { transform: translate(-50%, -50%) scale(0.12); opacity: 0; }
+            12%  { opacity: 0.9; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+
+        .marca-texto { position: relative; z-index: 2; max-width: 460px; }
+        .marca-texto h1 {
+            font-size: 30px;
+            line-height: 1.2;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        .marca-texto p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #9fb4cc;
+        }
+
+        /* ---------- Panel del formulario ---------- */
+        .acceso {
+            display: grid;
+            place-items: center;
+            padding: 40px 32px;
+            background: #fff;
+        }
+        .acceso-contenido { width: 100%; max-width: 380px; }
+        .acceso h2 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .acceso .sub {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--gris);
+            margin-bottom: 32px;
+        }
+
+        .campo { margin-bottom: 20px; }
+        .campo label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .campo-caja { position: relative; }
+        .campo-caja .icono {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            transform: translateY(-50%);
+            color: #8a9bb0;
+            pointer-events: none;
+            transition: color 0.2s;
+        }
+        .campo-caja:focus-within .icono { color: var(--senal); }
+        .campo-caja input {
+            width: 100%;
+            height: 52px;
+            padding: 0 14px 0 44px;
+            font-size: 15px;
+            color: var(--tinta);
+            background: var(--campo);
+            border: 1.5px solid var(--borde);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .campo-caja input::placeholder { color: #9aa8ba; }
+        .campo-caja input:focus {
+            background: #fff;
+            border-color: var(--senal);
+            box-shadow: 0 0 0 4px rgba(0, 168, 255, 0.16);
+        }
+        .campo-caja input.con-boton { padding-right: 84px; }
+
+        .ver-clave {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--marino);
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .ver-clave:hover { background: #e8f1f9; }
+        .ver-clave:focus-visible { outline: 2px solid var(--senal); }
+
+        .aviso-mayus {
+            display: none;
+            margin-top: 8px;
+            font-size: 12.5px;
+            color: #9a6700;
+        }
+        .aviso-mayus.visible { display: block; }
+
+        .login-nuevo .error-message {
+            min-height: 20px;
+            margin: 0 0 14px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #d93025;
+        }
+
+        .btn-ingresar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            height: 54px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--marino);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn-ingresar:hover { background: #0d4f7e; }
+        .btn-ingresar:focus-visible { outline: 3px solid var(--senal); outline-offset: 2px; }
+        .btn-ingresar:disabled { opacity: 0.85; cursor: wait; }
+        .btn-ingresar:disabled::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: girar 0.7s linear infinite;
+        }
+        @keyframes girar { to { transform: rotate(360deg); } }
+
+        .pie-acceso {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid #e6edf5;
+            font-size: 12.5px;
+            color: var(--gris);
+        }
+
+        /* ---------- Tablet / móvil ---------- */
+        @media (max-width: 900px) {
+            .login-shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+            .marca { padding: 28px 20px 64px; grid-template-rows: auto; }
+            .marca-texto { display: none; }
+            .emblema { width: min(300px, 78%); }
+            .acceso {
+                align-items: start;
+                margin-top: -32px;
+                padding: 36px 24px 40px;
+                border-radius: 28px 28px 0 0;
+                position: relative;
+                z-index: 3;
+            }
+        }
+
+        /* ---------- Movimiento reducido ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            .emblema .onda { animation: none; opacity: 0.5; }
+            .emblema .onda:nth-child(1) { transform: translate(-50%, -50%) scale(0.3); }
+            .emblema .onda:nth-child(2) { transform: translate(-50%, -50%) scale(0.5); opacity: 0.35; }
+            .emblema .onda:nth-child(3) { transform: translate(-50%, -50%) scale(0.7); opacity: 0.22; }
+            .emblema .onda:nth-child(4) { transform: translate(-50%, -50%) scale(0.9); opacity: 0.12; }
+            .btn-ingresar:disabled::before { animation: none; }
+        }
+    </style>
 </head>
 
-    <body class="cargando-auth pagina-login">
-    <header class="main-header"></header>
+<body class="cargando-auth login-nuevo">
+    <main class="login-shell">
 
-    <div class="window-container">
-        <div class="login-window">
-            <div class="login-card">
-                <div class="login-logo">
-                    <img src="LOGO/logo.png" alt="DMR Comunicaciones" class="logo-empresa">
-                </div>
-                <h3 style="margin-bottom: 20px; color: var(--text);">Iniciar sesión</h3>
-
-                <form id="formLogin">
-                    <div class="form-group">
-                        <label>Usuario (correo)</label>
-                        <input type="email" id="loginUsuario" placeholder="Ingresa tu usuario" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Contraseña</label>
-                        <input type="password" id="loginPassword" placeholder="Ingresa tu contraseña" required>
-                    </div>
-                    <p id="loginError" class="error-message"></p>
-                    <button type="submit" class="btn-primary" id="btnLogin">Ingresar</button>
-                </form>
+        <section class="marca" aria-hidden="false">
+            <div class="emblema">
+                <span class="onda"></span><span class="onda"></span><span class="onda"></span><span class="onda"></span>
+                <img src="LOGO/logo2.png" alt="DMR Comunicaciones, señal de TV e Internet">
             </div>
-        </div>
-    </div>
+            <div class="marca-texto">
+                <h1>Clientes, pagos y recibos en un solo lugar.</h1>
+                <p>Panel de gestión de DMR Comunicaciones para el control de servicios de internet y televisión.</p>
+            </div>
+        </section>
+
+        <section class="acceso">
+            <div class="acceso-contenido">
+                <h2>Iniciar sesión</h2>
+                <p class="sub">Ingresa con el correo y la contraseña de tu cuenta.</p>
+
+                <form id="formLogin" novalidate>
+                    <div class="campo">
+                        <label for="loginUsuario">Correo electrónico</label>
+                        <div class="campo-caja">
+                            <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+                            <input type="email" id="loginUsuario" placeholder="nombre@correo.com" autocomplete="username" required>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="loginPassword">Contraseña</label>
+                        <div class="campo-caja">
+                            <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                            <input type="password" id="loginPassword" class="con-boton" placeholder="Tu contraseña" autocomplete="current-password" required>
+                            <button type="button" class="ver-clave" id="verPassword" aria-label="Mostrar contraseña">Mostrar</button>
+                        </div>
+                        <p class="aviso-mayus" id="avisoMayus">Tienes las mayúsculas activadas.</p>
+                    </div>
+
+                    <p id="loginError" class="error-message" role="alert" aria-live="polite"></p>
+                    <button type="submit" class="btn-ingresar" id="btnLogin">Ingresar</button>
+                </form>
+
+                <p class="pie-acceso">Acceso solo para personal autorizado de DMR Comunicaciones.</p>
+            </div>
+        </section>
+
+    </main>
 
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
     <script src="funciones.js"></script>
+    <script>
+        // Solo interfaz: mostrar/ocultar contraseña y aviso de mayúsculas.
+        // No toca el inicio de sesión (eso sigue en funciones.js).
+        (function () {
+            var inp = document.getElementById('loginPassword');
+            var btn = document.getElementById('verPassword');
+            var aviso = document.getElementById('avisoMayus');
+            btn.addEventListener('click', function () {
+                var oculta = inp.type === 'password';
+                inp.type = oculta ? 'text' : 'password';
+                btn.textContent = oculta ? 'Ocultar' : 'Mostrar';
+                btn.setAttribute('aria-label', oculta ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            });
+            function revisarMayus(e) {
+                if (e.getModifierState) aviso.classList.toggle('visible', e.getModifierState('CapsLock'));
+            }
+            inp.addEventListener('keydown', revisarMayus);
+            inp.addEventListener('keyup', revisarMayus);
+            inp.addEventListener('blur', function () { aviso.classList.remove('visible'); });
+        })();
+    </script>
 </body>
 </html>

@@ -831,3 +831,16 @@ html, body {
     width: 100%;
   }
 }
+/* ============================================================
+   Modales flotantes (editar cliente y comprobante de pago)
+   Antes se abrían al final de la página, fuera de la vista.
+============================================================= */
+#editarClienteOverlay,
+#comprobanteOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1500;
+  overflow-y: auto;
+  align-items: flex-start;
+}
