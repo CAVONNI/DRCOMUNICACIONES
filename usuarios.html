@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMR Comunicaciones - Usuarios</title>
+    <link rel="icon" type="image/png" href="LOGO/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cargando-auth">
+
+    <header class="main-header"></header>
+
+    <div class="window-container">
+        <div class="admin-layout">
+            <aside class="sidebar">
+                <div class="login-logo">
+                    <img src="LOGO/logo2.png" alt="DMR Comunicaciones" class="logo-empresa">
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="incio.html">Inicio</a></li>
+                    <li><a href="listacliente.html">Clientes</a></li>
+                    <li><a href="registrocliente.html">+ Nuevo Cliente</a></li>
+                    <li><a href="pagocliente.html">Pagos</a></li>
+                    <li><a href="reportes.html">Reportes</a></li>
+                    <li class="active" data-solo-admin><a href="usuarios.html">Usuarios</a></li>
+                </ul>
+                <div class="sidebar-footer">Cerrar sesión</div>
+            </aside>
+            <main class="content-area">
+                <div class="content-header">
+                    <h1>Usuarios</h1>
+                    <span style="font-size:14px; color:gray;">Movimientos e ingresos registrados por cada usuario.</span>
+                </div>
+                <div class="panel-card">
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="buscarUsuario" class="search-box" placeholder="Buscar por nombre o correo...">
+                    </div>
+                    <p id="usuariosNota" style="display:none; font-size:12.5px; color:#9a6700; margin-bottom:12px;"></p>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Movimientos</th>
+                                <th>Pagos del mes</th>
+                                <th>Recaudado del mes</th>
+                                <th>Recaudado total</th>
+                                <th>Último movimiento</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuariosBody">
+                            <tr><td colspan="8">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="funciones.js"></script>
+    <script src="usuarios.js"></script>
+</body>
+</html>

@@ -582,6 +582,8 @@ function inicializarFormularioPago() {
             valorPagado: Number(valorPagado) || 0,
             metodoPago: metodoPago,
             observaciones: observaciones,
+            registradoPor: (auth.currentUser && auth.currentUser.email) || "",
+            registradoPorUid: (auth.currentUser && auth.currentUser.uid) || "",
             registradoEn: firebase.firestore.FieldValue.serverTimestamp()
         };
 
@@ -1174,6 +1176,7 @@ function inicializarPagina() {
     cargarReportes();
     cargarRegistroActividades();
     inicializarExportaciones();
+    if (typeof inicializarModuloUsuarios === "function") inicializarModuloUsuarios();
     aplicarPermisosPorRol();
 }
 
