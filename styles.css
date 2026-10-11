@@ -760,6 +760,19 @@ img {
   align-items: center;
   flex-direction: column;
   gap: 14px;
+  visibility: visible !important;
+}
+
+.spinner-global-overlay {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.spinner-global-overlay.visible {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .spinner-global-overlay.visible {

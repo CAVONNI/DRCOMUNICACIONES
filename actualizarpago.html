@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMR Comunicaciones - Actualizar Pago</title>
+    <link rel="icon" type="image/png" href="LOGO/logo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="cargando-auth">
@@ -37,10 +38,7 @@
                             <option>Transferencia</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Correo electrónico del cliente *</label>
-                        <input type="email" id="pagoCorreo" placeholder="cliente@correo.com" required>
-                    </div>
+                  
                     <div class="form-group">
                         <label>Observaciones (opcional)</label>
                         <textarea id="pagoObservaciones" rows="2" placeholder="Pago en efectivo, referencia..."></textarea>
@@ -78,6 +76,7 @@
             <div id="comprobanteEstado" class="comprobante-estado"></div>
             <div class="comprobante-acciones">
                 <button class="btn-secondary" type="button" id="btnCerrarComprobante">Cerrar y continuar</button>
+                <button class="btn-secondary" type="button" id="btnEditarComprobante" data-solo-admin>Editar pago</button>
                 <button class="btn-secondary" type="button" id="btnImprimirComprobante">Imprimir</button>
                 <button class="btn-success" type="button" id="btnDescargarComprobante" style="background: var(--accent);">Descargar PDF</button>
             </div>
